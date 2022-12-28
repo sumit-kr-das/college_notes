@@ -1,4 +1,4 @@
--- TABLE STRUCTURE
+-- TABLE STRUCTURE PCA1 GROUP A
 -- CUSTOMER(C_NO, C_NAME, C_ADDRESS)
 -- TRUCK(T_NO, DRIVER_NAME)
 -- PACKET(P_NO, C_NO, T_NO, WEIGHT, DESTINATION)
@@ -37,11 +37,7 @@ INSERT INTO CUSTOMER
         (4, 'Shoyeb','Kalkata'),
         (5, 'Kazi','Londan');
         
-INSERT INTO CUSTOMER
-	(C_NO, C_NAME, C_ADDRESS) VALUES
-		(8, 'Shoyeb','Kashmir');
-        
-SELECT * FROM PACKET;
+SELECT * FROM CUSTOMER;
 
 INSERT INTO TRUCK
 	(T_NO, DRIVER_NAME) VALUES
@@ -52,17 +48,12 @@ INSERT INTO TRUCK
         
 INSERT INTO PACKET
 	(P_NO, C_NO, T_NO, WEIGHT, DESTINATION) VALUES
-		(1, 1, 101, 4, 'Guskara'),
+		(1, 1, 101, 1, 'Guskara'),
         (2, 2, 102, 1, 'Bombay'),
-        (3, 6, 103, 2, 'Kashmir'),
-        (4, 3, 102, 5, 'Dubai'),
-        (5, 5, 103, 8, 'London');
-        
-INSERT INTO PACKET
-	(P_NO, C_NO, T_NO, WEIGHT, DESTINATION) VALUES
-		(8, 8, 104, 1, 'Kashmir'),
-        (9, 8, 104, 1, 'Kashmir'),
-        (10, 7, 104, 1, 'Guskara');
+        (3, 3, 103, 2, 'Kashmir'),
+        (4, 4, 102, 1, 'Dubai'),
+        (5, 4, 103, 1, 'London'),
+        (6, 5, 103, 8, 'London');
 
 SELECT * FROM CUSTOMER;
 
@@ -79,13 +70,15 @@ WHERE P.C_NO = C.C_NO AND P.T_NO = T.T_NO AND T.DRIVER_NAME='Krisnha';
 -- Q. NAME OF ALL CUSTOMERS WHOSE TOTAL(INDIVIDUAL) SHIPMENTS ARE LESS THAN ONE KG
 -- ANS BY PREM SANIA
 SELECT * FROM (
-SELECT C.C_NAME, SUM(P.WEIGHT) SUM_IS
-FROM customer C, PACKET P
-WHERE C.C_NO = P.C_NO
-GROUP BY C.C_NAME)WHERE SUM_IS < 3;
+	SELECT C.C_NAME, SUM(P.WEIGHT) SUM_IS
+	FROM customer C, PACKET P
+	WHERE C.C_NO = P.C_NO
+	GROUP BY C.C_NAME
+) WHERE SUM_IS < 2;
+
 -- ANS BY SUMIT ROUNAK
 SELECT C.C_NAME, SUM(P.WEIGHT)
-FROM CUSTOMER C, PACKET P
+FROM CUSTOMER AS C, PACKET AS P
 WHERE C.C_NO = P.C_NO
 GROUP BY C.C_NAME
-HAVING SUM(P.WEIGHT) < 3;
+HAVING SUM(P.WEIGHT) < 2;
