@@ -1,0 +1,98 @@
+-- SUBQUERY
+CREATE DATABASE AMAZON_EMP;
+USE AMAZON_EMP;
+
+CREATE TABLE EMPLOYEE(
+	id INT PRIMARY KEY,
+    f_name VARCHAR(255),
+    l_name VARCHAR(255),
+    age INT,
+    email_id VARCHAR(255) UNIQUE,
+    phone_no INT UNIQUE,
+    CITY VARCHAR(255)
+);
+
+CREATE TABLE CLIENT(
+	id INT PRIMARY KEY,
+	f_name VARCHAR(255),
+    l_name VARCHAR(255),
+    age INT,
+    email_id VARCHAR(255) UNIQUE,
+    phone_no INT UNIQUE,
+    CITY VARCHAR(255),
+    emp_id INT,
+    FOREIGN KEY(emp_id) REFERENCES EMPLOYEE(id) ON DELETE SET NULL
+);
+
+CREATE TABLE PROJECT(
+	id INT PRIMARY KEY,
+    emp_id INT,
+    name VARCHAR(255),
+    start_date DATE,
+    client_id INT,
+    FOREIGN KEY(emp_id) REFERENCES EMPLOYEE(id) ON DELETE SET NULL,
+    FOREIGN KEY(client_id) REFERENCES CLIENT(id) ON DELETE SET NULL
+);
+
+SELECT * FROM EMPLOYEE;
+SELECT * FROM CLIENT;
+SELECT * FROM PROJECT;
+
+-- WHERE
+-- EMPLOYEE WITH AGE > 30
+SELECT * FROM EMPLOYEE WHERE age > 30;
+-- USING SUBQUERY
+SELECT * FROM EMPLOYEE WHERE AGE IN (SELECT AGE FROM EMPLOYEE WHERE AGE > 30);
+
+-- EMPLOYEE DETAILS WORKING MORE THAN ONE PROJECT
+SELECT E.F_NAME,E.L_NAME, COUNT(P.emp_id)
+FROM EMPLOYEE AS E, PROJECT AS P
+WHERE E.id = P.emp_id
+GROUP BY P.emp_id
+HAVING COUNT(P.emp_id)>1;
+
+-- USING SUBQUERY
+SELECT E.F_NAME,E.L_NAME FROM EMPLOYEE AS E WHERE ID IN(
+	SELECT EMP_ID FROM PROJECT 
+    GROUP BY EMP_ID 
+    HAVING COUNT(EMP_ID) > 1
+);
+
+-- SINGLE VALUE SUBQUERY
+-- EMPLOYEE DETAILS HAVING AGE > AVERAGE AGE OF ALL EMPLOYEES
+SELECT * FROM EMPLOYEE AS E WHERE AGE > ( SELECT AVG(AGE) FROM EMPLOYEE);
+
+-- second height age
+select * from employee 
+group by age 
+order by  age desc limit 1, 1;
+
+-- USING SUBQUERY
+select max(age) from employee where age < (select max(age) from employee);
+
+select max(age) from employee where age not in (select max(age) from employee);
+
+select f_name, age from employee as e1 where 2-1 = 
+(select count(distinct age) from employee as e2 where e2.age > e1.age);
+
+-- FROM CLAUSE
+-- SELECT MAX AGE PERSON WHOSE FIRST_NAME HAS 'A'
+SELECT MAX(AGE) FROM (SELECT * FROM EMPLOYEE WHERE F_NAME LIKE '%a%') AS TEMP;
+
+-- CO-RELATED SUB-QUERIES
+-- FIND THIRD OLDEST EMPLOYEE
+SELECT * FROM EMPLOYEE E1 
+WHERE 3 = (SELECT COUNT(E2.AGE) FROM EMPLOYEE E2 WHERE E2.AGE >= E1.AGE);
+
+-- -------------------- VIEW -------------------------
+-- VIEW CREATE
+CREATE VIEW custom_view AS SELECT F_NAME, AGE FROM EMPLOYEE;
+
+-- VIEWING FROM VIEW
+SELECT * FROM custom_view;
+
+-- ALTERING THE VIEW
+ALTER VIEW custom_view AS SELECT F_NAME, L_NAME, AGE FROM EMPLOYEE;
+
+-- DROPPING THE VIEW
+DROP VIEW IF EXISTS custom_view;

@@ -68,3 +68,7 @@ INSERT INTO PROJECT
         (3, 3, 'C', '2021-01-16',5),
         (4, 3, 'D', '2021-04-26',2),
         (5, 3, 'E', '2021-05-21',4);
+        
+INSERT INTO PROJECT
+	(id, emp_id, name, start_date, client_id) VALUES
+		(6, 2, 'A', '2021-12-15',3);
