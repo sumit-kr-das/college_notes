@@ -2,6 +2,7 @@
 -- Procedural Language/Structured Query Language
 -- Extensavely use to code server side programming
 -- Case insensitive programming
+-- sqlplus
 
 -- Prototype for Anonymous Block
 Declare
