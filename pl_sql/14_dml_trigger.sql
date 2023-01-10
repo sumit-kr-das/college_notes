@@ -1,0 +1,18 @@
+-- CREATE TABLE superheros(
+--     sh_name VARCHAR2(20)
+-- ); 
+
+-- EXAMPLE 1
+SET SERVEROUTPUT ON;
+CREATE OR REPLACE TRIGGER bi_superherios
+BEFORE INSERT ON superheros
+FOR EACH ROW
+ENABLE
+
+DECLARE
+    v_user VARCHAR2(20);
+BEGIN
+    SELECT user INTO v_user FROM DUAL;
+    DBMS_OUTPUT.PUT_LINE('JUST INSERTED A NEW NAME MR. '||v_user);
+END;
+/
