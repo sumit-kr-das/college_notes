@@ -8,7 +8,7 @@ class Atm:
     def menu(self):
         user_input = input("""
             Welcome to Sumit's Bank :)
-            Hello how wood you like to proceed ?
+            Hello how would you like to proceed ?
             1. Enter 1 to create pin
             2. Enter 2 to deposit
             3. Enter 3 to withdrall
@@ -42,7 +42,8 @@ class Atm:
         print("Enter your pin: ")
         entered_pin = input()
         if(entered_pin == self.pin):
-            self.balance = int(input("Enter your ballance: "))
+            self.temp_bal = int(input("Enter your ballance: "))
+            self.balance = self.balance + self.temp_bal
             print("Deposit successful")
             self.menu()
         else:
