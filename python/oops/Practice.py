@@ -1,43 +1,39 @@
-class Fraction:
-    def __init__(self,n,d):
-        self.num = n
-        self.deno = d
-    def __str__(self):
-        return "{}/{}".format(self.num, self.deno)
-    def __add__(self, other):
-        temp_num = self.num * other.deno + self.deno * other.num
-        temp_deno = self.deno * other.deno
-        return "{}/{}".format(temp_num,temp_deno)
-    def __sub__(self, other):
-        temp_num = self.num * other.deno - self.deno * other.num
-        temp_deno = self.deno * other.deno
-        return "{}/{}".format(temp_num,temp_deno)
-    def __truediv__(self, other):
-        temp_num = self.num * other.deno
-        temp_deno = self.deno * other.num
-        return "{}/{}".format(temp_num, temp_deno)
-    def __mul__(self, other):
-        temp_num = self.num * other.num
-        temp_deno = self.deno * other.deno
-        return "{}/{}".format(temp_num, temp_deno)
-    def __eq__(self,other):
-        temp_num = float(self.num / self.deno)
-        temp_deno = float(other.num / other.deno)
+class Node:
+    def _init_(self,value):
+        self.data = value 
+        self.next = None #whenever node is created, in address part new node will hold null.
+
+class LinkedList:
+    #constractor
+    def _init_(self):
+        self.head = None
+        self.n = 0 #counter to count number of nodes in the linkedlist
+
+    #magic method to find length of linkedlist
+    def _len_(self):
+        return self.n
+
+    def insert_head(self,value): #method to insert new node in the linked list
+        new_node = Node(value) #creating new node
+        new_node.next = self.head #creating link with new node, using linked list's head
+        self.n = self.n+1 #whenever new node is connect, the counter of node will be incremented
     
-        if(temp_num == temp_deno):
-            return True
-        else:
-            return False
-
-
-n1 = Fraction(1,2)
-n2 = Fraction(4,8)
-
-print(n1)
-print(n2)
-
-print("Add",n1+n2)
-print("Subtraction",n1-n2)
-print("Division",n1/n2)
-print("Multiplication",n1*n2)
-print(n1==n2)
+    def _str_(self):
+        curr = self.head #curr is pointer, pointing to head of linked list
+        
+        result = ''
+        
+        while curr !=None:
+            result = result + str(curr.data) + '->' #this while loop will print every value of node in the linked list
+            curr = curr.next #.next of every node already holding the address of next node
+        return result[:-2]
+    
+    
+L = LinkedList()
+L.insert_head(4)
+L.insert_head(5)
+L.insert_head(6)
+L.insert_head(8)
+L.insert_head(9)
+L.insert_head(10)
+print(L)
