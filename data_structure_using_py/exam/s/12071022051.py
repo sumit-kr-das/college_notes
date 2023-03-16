@@ -1,11 +1,3 @@
-# Insertion Sort in Python
-# Time Complexity: 
-    # best case ->O(n)
-    # average case ->O(n^2)
-    # worst case ->O(n^2)
-# Auxiliary Space: O(1)
-# Space: O(n)
-
 def insertion_sort(ele):
     for i in range(1, len(ele)):
         anchor = ele[i]
