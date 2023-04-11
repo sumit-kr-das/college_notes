@@ -40,11 +40,14 @@ class BinarySearchTreeNode:
             return True
         if self.data > data:
             if self.left:
-                self.left.search(data)
+                return self.left.search(data)
+            else:
+                return False
         if self.data < data:
             if self.right:
-                self.right.search(data)
-        return False
+                return self.right.search(data)
+            else:
+                return False;
 
 def buildTree(elements):
     root = BinarySearchTreeNode(elements[0])
@@ -57,4 +60,4 @@ if __name__ == "__main__":
     ele = [12,32,1,4,5,6,12,7]
     ele_tree = buildTree(ele)
     print(ele_tree.inorderTraversal())
-    print(ele_tree.search(102))
+    print(ele_tree.search(1))
