@@ -1,0 +1,5 @@
+1) prime number/with range
+2) switch case
+3) fibonacci number/with range
+4) aromstrong number within range
+5) palindrome string/number
