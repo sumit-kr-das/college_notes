@@ -1,5 +1,6 @@
 ls - command in unix
-ls refers to List information about the FILEs, and it represemts the current directory by default
+ls refers to List information about the FILEs, 
+and it represemts the current directory by default
 Syatax: ls [OPTION]... [FILE]... 
 
 a)Listing Files with ls command without any arguments

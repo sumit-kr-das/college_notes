@@ -29,7 +29,7 @@ class LinkedList:
             itr = itr.next
         itr.next = Node(data, None)
     def insert_multiple_val(self,data_list):
-        self.head = None
+        self.head = None    
         for data in data_list:
             self.insert_at_end(data)
     def get_length(self):
